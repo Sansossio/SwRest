@@ -1,0 +1,25 @@
+{
+  "name": "swrest",
+  "version": "0.0.1",
+  "description": "Create simple routes using es6 and express",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest",
+    "express",
+    "api"
+  ],
+  "author": "Julio Sansossio",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "detect-port": "^1.2.1",
+    "express": "^4.16.2",
+    "express-form-data": "^2.0.1"
+  }
+}
