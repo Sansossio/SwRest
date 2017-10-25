@@ -8,6 +8,7 @@ const options = {
   port: 8080, // Default: 8080
   jsonParse: true, // Default: true
   allowForms: true, // Default: true
+  basePath: '/v1',
 };
 // Init router
 const Router = new SwRest.Router(options);
@@ -17,16 +18,8 @@ const Router = new SwRest.Router(options);
   .{method}({callback}, {requiereParas}, {filter})
 */
 Router.addRoute('/api/:id')
-  .get((params, method) => {
-    const response = params;
-    response.method = method;
-    return response;
-  })
-  .post((params, method) => {
-    const response = params;
-    response.method = method;
-    return response;
-  });
+  .get(params => params)
+  .post(params => params);
 /* Other methods
   .patch(callback)
   .delete(callback)

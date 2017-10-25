@@ -3,7 +3,7 @@
 import SwRest from '../index';
 
 // Advance router with es6
-class Example extends SwRest.ShooowitRoute {
+class Example extends SwRest.RouterClass {
   constructor(params) {
     super(params);
     this.basePath = '/'; // Default: Class name

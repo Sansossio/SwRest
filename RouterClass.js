@@ -1,4 +1,4 @@
-class ShooowitRoute {
+class RouterClass {
   constructor(params = {}) {
     this.validation = true;
     this.requiereParams = params.requiereParams || [];
@@ -20,4 +20,4 @@ class ShooowitRoute {
   }
 }
 
-export default ShooowitRoute;
+export default RouterClass;

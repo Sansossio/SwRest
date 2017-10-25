@@ -31,17 +31,19 @@ class Router {
     this.checkLogin = () => true;
     this.configureOptions(options);
     // Response global
+    this.methods = this.methods.bind(this);
+    this.avalaibleMethods = [
+      'get',
+      'post',
+      'put',
+      'patch',
+      'delete',
+      'options',
+      'all',
+    ];
     this.response = createGlobalResponse(
-      [
-        'get',
-        'post',
-        'put',
-        'patch',
-        'delete',
-        'options',
-        'all',
-      ],
-      this.methods.bind(this),
+      this.avalaibleMethods,
+      this.methods,
     );
     // Path to use
     this.path = '';
@@ -52,7 +54,7 @@ class Router {
     this.initServer();
   }
   getMethods() {
-    return this.response;
+    return this.avalaibleMethods;
   }
   /* eslint-disable no-else-return */
   configureOptions(options) {
@@ -120,7 +122,7 @@ class Router {
     // Verifications
     const parent = getParentName(component);
     const methods = getProptypes(component);
-    if (parent !== 'ShooowitRoute' || !component.check()) {
+    if (parent !== 'RouterClass' || !component.check()) {
       print('error', 'AdvanceRoute is a not ShoowitRest Component= ');
       return;
     }
@@ -135,8 +137,15 @@ class Router {
     methods.forEach((key) => {
       // Extra params
       let ext = '';
-      getFnParamNames(component[key]).forEach((k) => {
-        ext += `/:${k}`;
+      let method = 'all';
+      const parametters = getFnParamNames(component[key], this.getMethods());
+      parametters.forEach((k, c) => {
+        if (c === 0) {
+          method = this.getMethods().indexOf(k) > -1 ? k : 'all';
+          return;
+        }
+        const add = k.indexOf('_') > -1 ? k.substring(1) : `:${k}`;
+        ext += `/${add}`;
       });
       // Url of route
       let parseUrl = key.split(/(?=[A-Z])/).join('/');
@@ -145,14 +154,16 @@ class Router {
       url += ext;
       url = url.replace('//', '/');
       // Write rule (or test mode)
-      if (test) print('info', `Possible route: ${url}`);
+      if (test) print('info', `Possible route: ${url} (Method: ${method})`);
       else {
         // Set route in all methods
-        this.all(
-          component[key],
-          url,
-          component.getRequiereParams(),
-          component.getFilter(),
+        (method === 'all' ? this.all : this.methods)({
+          callback: component[key],
+          path: url,
+          requiereParams: component.getRequiereParams(),
+          filter: component.getFilter(),
+          method,
+        }
         );
       }
     });
@@ -165,8 +176,8 @@ class Router {
     this.path = '*';
     return this.response;
   }
-  all(callback, path = null, requiereParams = [], filter = {}) {
-    Object.keys(this.response).forEach((method) => {
+  all({ callback, path = null, requiereParams = [], filter = {} }) {
+    this.getMethods().forEach((method) => {
       if (method === 'all') return;
       this.methods({
         method,
