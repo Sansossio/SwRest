@@ -13,6 +13,11 @@ class ShooowitRoute {
   getFilter() {
     return this.filter;
   }
+  index() {
+    const response = {};
+    response.state = 'Working';
+    return response;
+  }
 }
 
 export default ShooowitRoute;
