@@ -1,8 +1,8 @@
 class ShooowitRoute {
-  constructor({ requiereParams = [], filter = {} }) {
+  constructor(params = {}) {
     this.validation = true;
-    this.requiereParams = requiereParams;
-    this.filter = filter;
+    this.requiereParams = params.requiereParams || [];
+    this.filter = params.filter || {};
   }
   check() {
     return this.validation;

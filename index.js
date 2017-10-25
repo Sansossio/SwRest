@@ -1,4 +1,6 @@
-import SwRest from './SwRest';
+import Router from './Router';
 import ShooowitRoute from './ShooowitRoute';
 
-export { SwRest, ShooowitRoute };
+const SwRest = { Router, ShooowitRoute };
+
+export default SwRest;
