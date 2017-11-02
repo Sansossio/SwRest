@@ -69,6 +69,15 @@ Router.advanceRoute(example);
 Router.testAdvanceRoute(example);
 ```
 
+## Available http methods
+```
+GET
+POST
+PUT
+PATCH
+DELETE
+OPTIONS
+```
 ## License
 
 [MIT](http://opensource.org/licenses/MIT) ©
