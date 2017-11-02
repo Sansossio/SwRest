@@ -1,6 +1,6 @@
 {
   "name": "swrest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create simple routes using es6 and express",
   "main": "index.js",
   "directories": {
