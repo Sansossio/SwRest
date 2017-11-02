@@ -26,12 +26,13 @@ OPTIONS
 ### Simple usage (ES5)
 ```js
   const SwRest = require('swrest/es5');
+  const options = { 'port': 80 };
   const Router = new SwRest.Router(options);
   Router.addRoute('/')
     .get((params) => {
       const response = { 'msg': 'ES5' };
       return response;
-    })
+    });
 ```
 ### Simple usage (ES6)
 
