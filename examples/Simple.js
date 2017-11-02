@@ -12,14 +12,13 @@ const options = {
 };
 // Init router
 const Router = new SwRest.Router(options);
-
 // Set routes
 /* Syntax: Router.addRouter({path})
-  .{method}({callback}, {requiereParas}, {filter})
+  .{method}({callback}, {requiereParams}, {filter})
 */
 Router.addRoute('/api/:id')
-  .get(params => params)
-  .post(params => params);
+  .get(params => params, ['i'])
+  .post(params => params, ['i'], { authRequired: true });
 /* Other methods
   .patch(callback)
   .delete(callback)

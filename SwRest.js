@@ -18,44 +18,43 @@ import {
   avalaibleHeader,
 } from './lib/Utils';
 
-class Router {
-  constructor(options = {}) {
+class SwRest {
+  constructor(options = {}, middleWare = {}) {
     // Express
     this.server = express();
     // Global options defaults
     this.port = 8080;
     this.jsonParse = true;
     this.allowForms = true;
-    this.consolePrint = false;
-    this.insecureLogin = true;
     this.checkLogin = () => true;
+    this.insecureLogin = true;
     this.configureOptions(options);
+    // Middleware
+    this.middleWare = middleWare;
+    this.middleWare.enabled = middleWare.enabled || false;
     // Response global
-    this.methods = this.methods.bind(this);
-    this.all = this.all.bind(this);
-    this.avalaibleMethods = [
-      'get',
-      'post',
-      'put',
-      'patch',
-      'delete',
-      'options',
-      'all',
-    ];
     this.response = createGlobalResponse(
-      this.avalaibleMethods,
-      this.methods,
+      [
+        'get',
+        'post',
+        'put',
+        'patch',
+        'delete',
+        'options',
+        'all',
+      ],
+      this.methods.bind(this),
     );
     // Path to use
     this.path = '';
     this.slogan = '[SWRest]';
     // Init
     setSlogan(this.slogan);
-    Listen.jsonParse = this.jsonParse;
+    Listen.jsonParse(this.jsonParse);
     this.initServer();
   }
   getMethods() {
-    return this.avalaibleMethods;
+    return this.response;
   }
   /* eslint-disable no-else-return */
   configureOptions(options) {
@@ -74,12 +73,13 @@ class Router {
     // Set middlewares
     // Custom
     this.server.use(bodyParser.json());
-    // Middles
-    const middle = new MiddleWare({ consolePrint: this.consolePrint }, this.slogan);
-    this.server.use(middle.bodyParser);
-    this.server.use(middle.run);
-    // Catch
-    this.server.use(middle.ErrorHandler);
+    if (this.middleWare.enabled) {
+      const middle = new MiddleWare(this.middleWare, this.slogan);
+      this.server.use(this.middleWare.bodyParser || middle.bodyParser);
+      this.server.use(this.middleWare.custom || middle.run);
+      // Catch
+      this.server.use(middle.ErrorHandler);
+    }
     // Bodyparser
     this.server.use(bodyParser.urlencoded({ extended: false }));
     // Parse forms
@@ -123,44 +123,38 @@ class Router {
     // Verifications
     const parent = getParentName(component);
     const methods = getProptypes(component);
-    if (parent !== 'RouterClass' || !component.check()) {
-      print('error', 'AdvanceRoute is a not ShoowitRest Component= ');
+    if (parent !== 'ShooowitRoute' || !component.check()) {
+      print('error', 'AdvanceRoute is a not ShoowitRest Component');
       return;
     }
     // Basepath
     const name = component.constructor.name || '';
     const basePath = getBasePath(component.basePath, name);
+    // Secure login
+    if (this.insecureLogin && component.getFilter().authRequired) {
+      print('error', `Filter 'authRequired' need a login callback in class constructor (${name})`);
+    }
     // Create rule
-    methods.forEach((key) => {
+    Object.keys(methods).forEach((key) => {
       // Extra params
       let ext = '';
-      let method = 'all';
-      const parametters = getFnParamNames(component[key], this.getMethods());
-      parametters.forEach((k, c) => {
-        if (c === 0) {
-          method = this.getMethods().indexOf(k) > -1 ? k : 'all';
-          return;
-        }
-        const add = k.indexOf('_') > -1 ? k.substring(1) : `:${k}`;
-        ext += `/${add}`;
+      getFnParamNames(component[key]).forEach((k) => {
+        ext += `/:${k}`;
       });
       // Url of route
       let parseUrl = key.split(/(?=[A-Z])/).join('/');
       parseUrl = parseUrl === 'index' ? '' : parseUrl;
       let url = `${basePath}/${parseUrl}`.toLowerCase();
       url += ext;
-      url = url.replace('//', '/');
       // Write rule (or test mode)
-      if (test) print('info', `Possible route: ${url} (Method: ${method})`);
+      if (test) print('info', `Possible route: ${url}`);
       else {
         // Set route in all methods
-        (method === 'all' ? this.all : this.methods)({
-          callback: component[key],
-          path: url,
-          requiereParams: component.getRequiereParams(),
-          filter: component.getFilter(),
-          method,
-        }
+        this.all(
+          component[key],
+          url,
+          component.getRequiereParams(),
+          component.getFilter(),
         );
       }
     });
@@ -173,8 +167,8 @@ class Router {
     this.path = '*';
     return this.response;
   }
-  all({ callback, path = null, requiereParams = [], filter = {} }) {
-    this.getMethods().forEach((method) => {
+  all(callback, path = null, requiereParams = [], filter = {}) {
+    Object.keys(this.response).forEach((method) => {
       if (method === 'all') return;
       this.methods({
         method,
@@ -192,11 +186,6 @@ class Router {
     filter = {},
     path = null,
   }) {
-    // Login
-    // Secure login
-    if (this.insecureLogin && filter.authRequired) {
-      print('error', `Filter 'authRequired' need a function in constructor 'checklogin'`);
-    }
     // Verificamos callback
     if (typeof callback !== 'function') {
       print('error', `Api methods need callback: ${path || this.path} (${method})`);
@@ -232,4 +221,4 @@ class Router {
   }
 }
 
-export default Router;
+export default SwRest;
