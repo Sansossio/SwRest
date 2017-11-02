@@ -23,3 +23,15 @@ Router.addRoute('/api/:id')
   .patch(callback)
   .delete(callback)
   .options(callback) */
+
+// 404
+Router.notFound()
+  .get(() => {
+    return 'NotFound Get';
+  })
+  .post(() => {
+    return 'NotFound Post';
+  })
+  .all(() => {
+    return 'NotFound Another methods';
+  });

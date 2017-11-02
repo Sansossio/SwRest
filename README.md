@@ -89,6 +89,20 @@ Router.advanceRoute(example);
 Router.testAdvanceRoute(example);
 ```
 
+## Not found
+```js
+Router.notFound()
+  .get(() => {
+    return 'NotFound Get';
+  })
+  .post(() => {
+    return 'NotFound Post';
+  })
+  .all(() => {
+    return 'NotFound Another methods';
+  });
+```
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT) ©
