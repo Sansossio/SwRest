@@ -4,8 +4,6 @@
 
 SwRest is a simple library based on express [Express](http://expressjs.com/).
 
-- [GitHub](https://github.com/Sansossio/SwRest)
-
 ## Getting started
 
 ### Install
