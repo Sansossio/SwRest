@@ -17,7 +17,7 @@ npm install swrest --save
 git clone https://github.com/Sansossio/SwRest.git
 ```
 ## Available http methods
-```
+```text
 GET
 POST
 PUT
