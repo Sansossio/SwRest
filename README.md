@@ -9,9 +9,12 @@ SwRest is a simple library based on express [Express](http://expressjs.com/).
 ## Getting started
 
 ### Install
-
 ```shell
 npm install swrest --save
+```
+### Clone
+```shell
+git clone https://github.com/Sansossio/SwRest.git
 ```
 ## Available http methods
 ```
