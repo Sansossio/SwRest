@@ -1,13 +1,14 @@
 {
   "name": "swrest",
-  "version": "0.0.3",
-  "description": "Create simple routes using es6 and express",
+  "version": "0.0.4",
+  "description": "Simple routes with es6 or es5, based on express",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "start": "babel-node ./examples/Simple.js --presets es2015,stage-2"
+    "start": "babel-node ./examples/Simple.js --presets es2015,stage-2",
+    "build": "babel src -d build/es5/src"
   },
   "keywords": [
     "rest",
@@ -17,6 +18,7 @@
   "author": "Julio Sansossio",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "detect-port": "^1.2.1",
     "express": "^4.16.2",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.9.0",

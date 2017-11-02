@@ -88,7 +88,7 @@ export const getProptypes = component => {
       .sort()
       .filter((p, i, arr) =>
         typeof obj[p] === 'function' &&
-        reservedMethods.indexOf(p) === -1 &&  
+        reservedMethods.indexOf(p) === -1 &&
         (i == 0 || p !== arr[i - 1]) &&
         props.indexOf(p) === -1
       )
@@ -114,7 +114,7 @@ export const getBasePath = (basePath, name) => {
   return response;
 };
 
-export const getFnParamNames = (fn, methods) => {
+export const getFnParamNames = fn => {
   const fstr = fn.toString();
   const parametters = fstr.match(/\(.*?\)/)[0].replace(/[()]/gi, '').replace(/\s/gi, '').split(',');
   if (parametters.length < 2) return [];

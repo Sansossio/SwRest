@@ -13,8 +13,27 @@ SwRest is a simple library based on express [Express](http://expressjs.com/).
 ```shell
 npm install swrest --save
 ```
+## Available http methods
+```
+GET
+POST
+PUT
+PATCH
+DELETE
+OPTIONS
+```
 
-### Simple usage
+### Simple usage (ES5)
+```js
+  const SwRest = require('swrest/es5');
+  const Router = new SwRest.Router(options);
+  Router.addRoute('/')
+    .get((params) => {
+      const response = { 'msg': 'ES5' };
+      return response;
+    })
+```
+### Simple usage (ES6)
 
 ```js
 import SwRest from 'swrest';
@@ -24,7 +43,7 @@ Router.addRoute('/')
   .get(params => params);
 ```
 
-### Routes By Class
+### Routes By Class (ES6)
 ```js
 import SwRest from 'swrest';
 // Options for router
@@ -69,15 +88,6 @@ Router.advanceRoute(example);
 Router.testAdvanceRoute(example);
 ```
 
-## Available http methods
-```
-GET
-POST
-PUT
-PATCH
-DELETE
-OPTIONS
-```
 ## License
 
 [MIT](http://opensource.org/licenses/MIT) ©

@@ -1,7 +1,5 @@
-/* eslint-disable class-methods-use-this */
-/* Import library */
-import SwRest from '../src';
-
+const SwRest = require('../es5');
+// In your project is require('swrest/es5')
 // Options for router
 const options = {
   consolePrint: true, // Default: false

@@ -1,5 +1,5 @@
-import Router from './Router';
-import RouterClass from './RouterClass';
+import Router from './src/Router';
+import RouterClass from './src/RouterClass';
 
 const SwRest = { Router, RouterClass };
 

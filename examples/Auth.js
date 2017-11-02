@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* Import library */
-import SwRest from '../index';
+import SwRest from '../src';
 
 // Advance router with es6
 class Example extends SwRest.RouterClass {
