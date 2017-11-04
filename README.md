@@ -89,7 +89,25 @@ Router.advanceRoute(example);
 // Print generate routes
 Router.testAdvanceRoute(example);
 ```
-
+## Example login (ES5)
+```js
+  const SwRest = require('swrest/es5');
+  // Login func
+  function loginToken(token) {
+    return token === '1234';
+  }
+  const options = {
+    'port': 80,
+    checkLogin: loginToken
+  };
+  // Set router
+  const Router = new SwRest.Router(options);
+  Router.addRoute('/')
+    .get((params) => {
+      const response = { 'msg': 'ES5' };
+      return response;
+    });
+```
 ## Not found
 ```js
 Router.notFound()
