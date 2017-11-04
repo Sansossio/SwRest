@@ -94,6 +94,8 @@ Router.testAdvanceRoute(example);
   const SwRest = require('swrest/es5');
   // Login func
   function loginToken(token) {
+    // False = Login fail
+    // if login is true, return user info how json
     return token === '1234';
   }
   const options = {
@@ -103,7 +105,11 @@ Router.testAdvanceRoute(example);
   // Set router
   const Router = new SwRest.Router(options);
   Router.addRoute('/api/:id')
-    .get(params => params, [], { authRequired: true })
+    .get(params => {
+      const response = params;
+      const user = params.user;
+      return response;
+    }, [], { authRequired: true })
 ```
 ## Not found
 ```js
