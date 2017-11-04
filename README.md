@@ -102,11 +102,8 @@ Router.testAdvanceRoute(example);
   };
   // Set router
   const Router = new SwRest.Router(options);
-  Router.addRoute('/')
-    .get((params) => {
-      const response = { 'msg': 'ES5' };
-      return response;
-    });
+  Router.addRoute('/api/:id')
+    .get(params => params, [], { authRequired: true })
 ```
 ## Not found
 ```js

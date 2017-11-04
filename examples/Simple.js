@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* Import library */
-import SwRest from '../src';
+import SwRest from '..';
 
 // Options for router
 const options = {
