@@ -20,7 +20,7 @@ Router.addRoute('/:name')
 {"msg":"Welcome julio sansossio"}
 ```
 ### Url
-```
+```hmtl
 http://localhost:8080/julio%20sansossio
 ```
 ## Getting started

@@ -1,6 +1,6 @@
 {
   "name": "swrest",
-  "version": "0.1.04",
+  "version": "0.1.041",
   "description": "Simple routes with es6 or es5, based on express",
   "main": "index.js",
   "directories": {
