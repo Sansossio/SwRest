@@ -1,6 +1,6 @@
 {
   "name": "swrest",
-  "version": "0.1.03",
+  "version": "0.1.04",
   "description": "Simple routes with es6 or es5, based on express",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
     "url": "https://github.com/Sansossio/SwRest"
   },
   "scripts": {
-    "start": "babel-node ./examples/ES5Login.js --presets es2015,stage-2",
+    "start": "babel-node ./examples/ES5Simple.js --presets es2015,stage-2",
     "build": "babel src -d build/es5/src"
   },
   "keywords": [

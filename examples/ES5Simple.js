@@ -14,8 +14,14 @@ const Router = new SwRest.Router(options);
 /* Syntax: Router.addRouter({path})
   .{method}({callback}, {requiereParams}, {filter})
 */
-Router.addRoute('/api/:id')
-  .get(params => params, ['i'])
+Router.addRoute('/:name')
+  .get(params => {
+    const name = params.name;
+    const response = {};
+    response.msg = `Welcome ${name}`;
+    response.status = 200;
+    return response;
+  })
   .post(params => params, ['i'], { authRequired: true });
 /* Other methods
   .patch(callback)

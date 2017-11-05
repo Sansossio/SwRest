@@ -3,9 +3,27 @@
 > Simple rest api for NodeJs or MeteorJs, based on express
 
 SwRest is a simple library based on express [Express](http://expressjs.com/).
-
+## Simple example
+### Code
+```js
+Router.addRoute('/:name')
+  .get(params => {
+    const name = params.name;
+    const response = {};
+    response.msg = `Welcome ${name}`;
+    response.status = 200;
+    return response;
+  })
+```
+### Response
+```json
+{"msg":"Welcome julio sansossio"}
+```
+### Url
+```
+http://localhost:8080/julio%20sansossio
+```
 ## Getting started
-
 ### Install
 ```shell
 npm install swrest --save
