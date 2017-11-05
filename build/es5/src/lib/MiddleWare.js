@@ -56,7 +56,7 @@ class MiddleWare {
     } = req;
     // Print console
     this.print('info', `Resquest ${method} at ${originalUrl} (${ip})`);
-
+    res.setHeader('X-Powered-By', 'SwRest');
     req.requestTime = requestTime;
     next();
   }
