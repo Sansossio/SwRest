@@ -19,7 +19,8 @@ Router.addRoute('/:name')
 ```json
 {"msg":"Welcome julio sansossio"}
 ```
-#### http://localhost:8080/julio%20sansossio
+### Url
+* http://example.com/julio%20sansossio
 ## Getting started
 ### Install
 ```shell
